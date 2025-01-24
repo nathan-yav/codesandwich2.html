@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande de Sandwich</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        select, input[type="text"], input[type="tel"], input[type="number"], input[type="submit"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0f0fed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Commande de Sandwich</h1>
+        <form id="orderForm">
+            <label for="nom">Votre nom :</label>
+            <input type="text" id="nom" name="nom" required>
+
+            <label for="type">Type de pain :</label>
+            <select id="type" name="type" required>
+                <option value="baguette entière">Baguette entière(5000fc)</option>
+                <option value="demi-baguette">Demi-baguette (2500fc)</option>
+            </select>
+
+            <label for="ingredients">Choisissez votre option :</label>
+            <select id="ingredients" name="ingredients" required>
+                <option value="avec ketchup 500fc">Avec ketchup (+500fc)</option>
+                <option value="aux fromage 1000fc">aux fromage (+1000fc)</option>
+                <option value="sans ketchup">Sans ketchup</option>
+            </select>
+
+            <label for="quantite">Quantité :</label>
+            <input type="number" id="quantite" name="quantite" min="1" value="1" required>
+
+            <label for="adresse">Adresse de réception :</label>
+            <textarea id="adresse" name="adresse" placeholder="Votre adresse complète" rows="3" required></textarea>
+
+            <label for="whatsapp">Votre numéro WhatsApp :</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="+243XXXXXXXXX" required>
+
+            <input type="submit" value="Commander">
+        </form>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <p>Ou contactez-nous directement via WhatsApp :</p>
+            <a href="https://wa.me/243977887778" target="_blank" style="color: #28a745; text-decoration: none; font-size: 16px;">Cliquez ici pour discuter avec nous sur WhatsApp</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("orderForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const nom = document.getElementById("nom").value.trim();
+            const type = document.getElementById("type").value;
+            const ingredient = document.getElementById("ingredients").value;
+            const quantite = document.getElementById("quantite").value;
+            const adresse = document.getElementById("adresse").value.trim();
+            const whatsapp = document.getElementById("whatsapp").value.trim();
+
+            if (nom && type && ingredient && quantite && adresse && whatsapp) {
+                const message = `Bonjour, je m'appelle ${nom}. Je souhaite commander ${quantite} sandwich(s) avec ${type} et ${ingredient}. Veuillez livrer à l'adresse suivante : ${adresse}. Mon numéro WhatsApp est ${whatsapp}.`;
+                const whatsappUrl = `https://wa.me/243977887778?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, "_blank");
+            } else {
+                alert("Veuillez remplir tous les champs.");
+            }
+        });
+    </script>
+</body>
+</html>
